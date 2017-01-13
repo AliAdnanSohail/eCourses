@@ -46,7 +46,7 @@ namespace ECourses.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,First_Name,Second_Name,Password,Address,Gender")] Teacher teacher)
+        public ActionResult Create([Bind(Include = "Id,First_Name,Second_Name,Password,Address,Gender,User_Name")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {

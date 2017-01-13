@@ -100,7 +100,19 @@ namespace ECourses.Controllers
         }
 
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/TeachersApiController/Login/{name}/{pass}")]
 
+        public ActionResult Login(string name, string pass)
+
+        {
+            Teacher obj = dbef.Teachers.Where(x => x.User_Name.Equals(name) && x.Password.Equals(pass)).FirstOrDefault();
+            
+
+
+            return new JsonResult() { Data = obj, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+        }
 
     }
 }
