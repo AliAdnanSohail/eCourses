@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ECoursesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="About_Us">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Advertisement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Web_Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Social_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_Num" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Start_Date" Type="DateTime" Precision="3" />
+    <Property Name="End_Date" Type="DateTime" Precision="3" />
+    <Property Name="Views" Type="Int32" Nullable="false" />
+    <Property Name="Likes" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Course_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="Created_At" Type="DateTime" Precision="3" />
+    <Property Name="Updated_At" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Favourite_Courses" Relationship="Self.FK_Favourite_Courses_ToCourses" FromRole="Course" ToRole="Favourite_Courses" />
+    <NavigationProperty Name="Like_Courses" Relationship="Self.FK_Like_Courses_ToCourses" FromRole="Course" ToRole="Like_Courses" />
+    <NavigationProperty Name="Subscription_Courses" Relationship="Self.FK_Subscription_Courses_ToCourses" FromRole="Course" ToRole="Subscription_Courses" />
+    <Property Name="Teacher_Id" Type="Int32" />
+    <NavigationProperty Name="Teacher" Relationship="ECoursesDBModel.FK_Course_ToTeacher" FromRole="Course" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Favourite_Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="Int32" />
+    <Property Name="Course_Id" Type="Int32" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_Favourite_Courses_ToCourses" FromRole="Favourite_Courses" ToRole="Course" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Favourite_Courses_ToUser" FromRole="Favourite_Courses" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Like_Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="Int32" />
+    <Property Name="Course_Id" Type="Int32" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_Like_Courses_ToCourses" FromRole="Like_Courses" ToRole="Course" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Like_Courses_ToUser" FromRole="Like_Courses" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Subscription_Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="Int32" />
+    <Property Name="Course_Id" Type="Int32" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_Subscription_Courses_ToCourses" FromRole="Subscription_Courses" ToRole="Course" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Subscription_Courses_ToUser" FromRole="Subscription_Courses" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Second_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Courses" Relationship="ECoursesDBModel.FK_Course_ToTeacher" FromRole="Teacher" ToRole="Course" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Second_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Favourite_Courses" Relationship="Self.FK_Favourite_Courses_ToUser" FromRole="User" ToRole="Favourite_Courses" />
+    <NavigationProperty Name="Like_Courses" Relationship="Self.FK_Like_Courses_ToUser" FromRole="User" ToRole="Like_Courses" />
+    <NavigationProperty Name="Subscription_Courses" Relationship="Self.FK_Subscription_Courses_ToUser" FromRole="User" ToRole="Subscription_Courses" />
+  </EntityType>
+  <Association Name="FK_Favourite_Courses_ToCourses">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Favourite_Courses" Type="Self.Favourite_Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Favourite_Courses">
+        <PropertyRef Name="Course_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Like_Courses_ToCourses">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Like_Courses" Type="Self.Like_Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Like_Courses">
+        <PropertyRef Name="Course_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Subscription_Courses_ToCourses">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Subscription_Courses" Type="Self.Subscription_Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subscription_Courses">
+        <PropertyRef Name="Course_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favourite_Courses_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Favourite_Courses" Type="Self.Favourite_Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Favourite_Courses">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Like_Courses_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Like_Courses" Type="Self.Like_Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Like_Courses">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Subscription_Courses_ToUser">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Subscription_Courses" Type="Self.Subscription_Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subscription_Courses">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ECoursesDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="About_Us" EntityType="Self.About_Us" />
+    <EntitySet Name="Advertisements" EntityType="Self.Advertisement" />
+    <EntitySet Name="Courses" EntityType="Self.Course" />
+    <EntitySet Name="Favourite_Courses" EntityType="Self.Favourite_Courses" />
+    <EntitySet Name="Like_Courses" EntityType="Self.Like_Courses" />
+    <EntitySet Name="Subscription_Courses" EntityType="Self.Subscription_Courses" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Favourite_Courses_ToCourses" Association="Self.FK_Favourite_Courses_ToCourses">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Favourite_Courses" EntitySet="Favourite_Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Like_Courses_ToCourses" Association="Self.FK_Like_Courses_ToCourses">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Like_Courses" EntitySet="Like_Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Subscription_Courses_ToCourses" Association="Self.FK_Subscription_Courses_ToCourses">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Subscription_Courses" EntitySet="Subscription_Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favourite_Courses_ToUser" Association="Self.FK_Favourite_Courses_ToUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Favourite_Courses" EntitySet="Favourite_Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Like_Courses_ToUser" Association="Self.FK_Like_Courses_ToUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Like_Courses" EntitySet="Like_Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Subscription_Courses_ToUser" Association="Self.FK_Subscription_Courses_ToUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Subscription_Courses" EntitySet="Subscription_Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_ToTeacher" Association="ECoursesDBModel.FK_Course_ToTeacher">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Course_ToTeacher">
+    <End Type="ECoursesDBModel.Teacher" Role="Teacher" Multiplicity="0..1" />
+    <End Type="ECoursesDBModel.Course" Role="Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="Teacher_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
