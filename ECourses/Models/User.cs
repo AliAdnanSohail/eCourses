@@ -23,11 +23,12 @@ namespace ECourses.Models
         }
     
         public int Id { get; set; }
-        public string First_Name { get; set; }
-        public string Second_Name { get; set; }
         public string Password { get; set; }
         public string Address { get; set; }
         public string Gender { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Device_Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favourite_Courses> Favourite_Courses { get; set; }

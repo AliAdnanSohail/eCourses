@@ -27,6 +27,10 @@
     <EntitySetMapping Name="Courses">
       <EntityTypeMapping TypeName="ECoursesDBModel.Course">
         <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="City_id" ColumnName="City_id" />
+          <ScalarProperty Name="Course_Type_id" ColumnName="Course_Type_id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Teacher_Id" ColumnName="Teacher_Id" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -36,7 +40,6 @@
           <ScalarProperty Name="Views" ColumnName="Views" />
           <ScalarProperty Name="Likes" ColumnName="Likes" />
           <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Course_Type" ColumnName="Course_Type" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="Created_At" ColumnName="Created_At" />
@@ -74,6 +77,7 @@
     <EntitySetMapping Name="Teachers">
       <EntityTypeMapping TypeName="ECoursesDBModel.Teacher">
         <MappingFragment StoreEntitySet="Teacher">
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="User_Name" ColumnName="User_Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="First_Name" ColumnName="First_Name" />
@@ -87,12 +91,38 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="ECoursesDBModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Device_Id" ColumnName="Device_Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-          <ScalarProperty Name="Second_Name" ColumnName="Second_Name" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="ECoursesDBModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="ECoursesDBModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Course_Type">
+      <EntityTypeMapping TypeName="ECoursesDBModel.Course_Type">
+        <MappingFragment StoreEntitySet="Course_Type">
+          <ScalarProperty Name="Course_Type1" ColumnName="Course_Type" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

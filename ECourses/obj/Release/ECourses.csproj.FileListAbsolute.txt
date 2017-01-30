@@ -1,3 +1,4 @@
+C:\Users\Ali Adnan\documents\visual studio 2015\Projects\ECourses\ECourses\obj\Release\ECourses.csprojResolveAssemblyReference.cache
 C:\Users\Ali Adnan\documents\visual studio 2015\Projects\ECourses\ECourses\bin\roslyn\csc.exe
 C:\Users\Ali Adnan\documents\visual studio 2015\Projects\ECourses\ECourses\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Ali Adnan\documents\visual studio 2015\Projects\ECourses\ECourses\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll

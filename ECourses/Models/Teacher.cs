@@ -27,6 +27,7 @@ namespace ECourses.Models
         public string Address { get; set; }
         public string Gender { get; set; }
         public string User_Name { get; set; }
+        public string Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Course> Courses { get; set; }

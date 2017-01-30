@@ -9,6 +9,14 @@
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Image" Type="varchar(max)" />
   </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="User_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Advertisement">
     <Key>
       <PropertyRef Name="Id" />
@@ -20,6 +28,13 @@
     <Property Name="Web_Address" Type="nvarchar" MaxLength="200" />
     <Property Name="Social_Address" Type="nvarchar" MaxLength="100" />
     <Property Name="Phone_Num" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Course">
     <Key>
@@ -33,12 +48,22 @@
     <Property Name="Views" Type="int" Nullable="false" />
     <Property Name="Likes" Type="int" Nullable="false" />
     <Property Name="Address" Type="nvarchar" MaxLength="500" />
-    <Property Name="Course_Type" Type="nvarchar" MaxLength="50" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Duration" Type="int" Nullable="false" />
     <Property Name="Created_At" Type="datetime" />
     <Property Name="Updated_At" Type="datetime" />
     <Property Name="Teacher_Id" Type="int" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Course_Type_id" Type="int" />
+    <Property Name="City_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Course_Type">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Course_Type" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Favourite_Courses">
     <Key>
@@ -75,18 +100,44 @@
     <Property Name="Address" Type="nvarchar" MaxLength="500" />
     <Property Name="Gender" Type="nvarchar" MaxLength="20" />
     <Property Name="User_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="First_Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Second_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar" MaxLength="500" />
     <Property Name="Gender" Type="nvarchar" MaxLength="20" />
+    <Property Name="Device_Id" Type="varchar" MaxLength="500" />
   </EntityType>
+  <Association Name="FK_Course_ToCity">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="City_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_ToCourseType">
+    <End Role="Course_Type" Type="Self.Course_Type" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course_Type">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="Course_Type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Course_ToTeacher">
     <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
     <End Role="Course" Type="Self.Course" Multiplicity="*" />
@@ -173,13 +224,24 @@
   </Association>
   <EntityContainer Name="ECoursesDBModelStoreContainer">
     <EntitySet Name="About_Us" EntityType="Self.About_Us" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Advertisement" EntityType="Self.Advertisement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Course_Type" EntityType="Self.Course_Type" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Favourite_Courses" EntityType="Self.Favourite_Courses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Like_Courses" EntityType="Self.Like_Courses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subscription_Courses" EntityType="Self.Subscription_Courses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Course_ToCity" Association="Self.FK_Course_ToCity">
+      <End Role="City" EntitySet="City" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_ToCourseType" Association="Self.FK_Course_ToCourseType">
+      <End Role="Course_Type" EntitySet="Course_Type" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
     <AssociationSet Name="FK_Course_ToTeacher" Association="Self.FK_Course_ToTeacher">
       <End Role="Teacher" EntitySet="Teacher" />
       <End Role="Course" EntitySet="Course" />

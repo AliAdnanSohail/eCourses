@@ -13,7 +13,7 @@ namespace ECourses.Controllers
     public class TeachersController : Controller
     {
         private ECoursesDBEntities db = new ECoursesDBEntities();
-
+        ImageUpload obj = new ImageUpload();
         // GET: Teachers
         public ActionResult Index()
         {
@@ -45,11 +45,34 @@ namespace ECourses.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,First_Name,Second_Name,Password,Address,Gender,User_Name")] Teacher teacher)
+       
+        public ActionResult Create( Teacher teacher, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            string image="";
+           
+            if (file != null)
             {
+                //pic = System.IO.Path.GetFileName(file.FileName);
+                // path = System.IO.Path.Combine(
+                //                       Server.MapPath("~/App_Data/uploads"), pic);
+                //// file is uploaded
+                //file.SaveAs(path);
+                //obj.PostToImgur(path);
+
+
+                
+                byte[] fileBytes = new byte[file.ContentLength];
+                file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                file.InputStream.Close();
+                string fileContent = Convert.ToBase64String(fileBytes);
+               image = obj.Upload(fileContent);
+
+
+            }
+
+                if (ModelState.IsValid)
+            {
+                teacher.Image = image;
                 db.Teachers.Add(teacher);
                 db.SaveChanges();
                 return RedirectToAction("Index");

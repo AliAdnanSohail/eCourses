@@ -33,5 +33,8 @@ namespace ECourses.Models
         public virtual DbSet<Subscription_Courses> Subscription_Courses { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Course_Type> Course_Type { get; set; }
     }
 }

@@ -30,12 +30,15 @@ namespace ECourses.Models
         public int Views { get; set; }
         public int Likes { get; set; }
         public string Address { get; set; }
-        public string Course_Type { get; set; }
         public string Description { get; set; }
         public int Duration { get; set; }
         public Nullable<System.DateTime> Created_At { get; set; }
         public Nullable<System.DateTime> Updated_At { get; set; }
         public Nullable<int> Teacher_Id { get; set; }
+        public string Gender { get; set; }
+        public Nullable<int> Price { get; set; }
+        public Nullable<int> Course_Type_id { get; set; }
+        public Nullable<int> City_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favourite_Courses> Favourite_Courses { get; set; }
@@ -44,5 +47,7 @@ namespace ECourses.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subscription_Courses> Subscription_Courses { get; set; }
         public virtual Teacher Teacher { get; set; }
+        public virtual City City { get; set; }
+        public virtual Course_Type Course_Type { get; set; }
     }
 }

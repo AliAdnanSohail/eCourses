@@ -46,7 +46,7 @@ namespace ECourses.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Image,Start_Date,End_Date,Views,Likes,Address,Course_Type,Description,Duration,Created_At,Updated_At,Teacher_Id")] Course course)
+        public ActionResult Create([Bind(Include = "Id,Title,Image,Start_Date,End_Date,Views,Likes,Address,Course_Type_id,City_id,Description,Duration,Created_At,Updated_At,Teacher_Id")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace ECourses.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Image,Start_Date,End_Date,Views,Likes,Address,Course_Type,Description,Duration,Created_At,Updated_At")] Course course)
+        public ActionResult Edit([Bind(Include = "Id,Title,Image,Start_Date,End_Date,Views,Likes,Address,Course_Type_id,City_id,Description,Duration,Created_At,Updated_At")] Course course)
         {
             if (ModelState.IsValid)
             {
