@@ -13,16 +13,25 @@ namespace ECourses.Controllers
     public class CoursesController : Controller
     {
         private ECoursesDBEntities db = new ECoursesDBEntities();
+        ImageUpload obj = new ImageUpload();
 
         // GET: Courses
         public ActionResult Index()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View(db.Courses.ToList());
         }
 
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +47,10 @@ namespace ECourses.Controllers
         // GET: Courses/Create
         public ActionResult Create()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -46,15 +59,34 @@ namespace ECourses.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Image,Start_Date,End_Date,Views,Likes,Address,Course_Type_id,City_id,Description,Duration,Created_At,Updated_At,Teacher_Id")] Course course)
+        public ActionResult Create( Course course, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            if (Session["admin"] == null)
             {
-                course.Created_At = DateTime.UtcNow.ToLocalTime();
-                db.Courses.Add(course);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
+
+            string image = "";
+
+            if (file != null)
+            {
+
+                byte[] fileBytes = new byte[file.ContentLength];
+                file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                file.InputStream.Close();
+                string fileContent = Convert.ToBase64String(fileBytes);
+                image = obj.Upload(fileContent);
+            }
+
+                if (ModelState.IsValid)
+                {
+                   course.Image = image;
+                    course.Created_At = DateTime.UtcNow.ToLocalTime();
+                    db.Courses.Add(course);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            
 
             return View(course);
         }
@@ -62,6 +94,10 @@ namespace ECourses.Controllers
         // GET: Courses/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -79,8 +115,26 @@ namespace ECourses.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Image,Start_Date,End_Date,Views,Likes,Address,Course_Type_id,City_id,Description,Duration,Created_At,Updated_At")] Course course)
+        public ActionResult Edit( Course course, HttpPostedFileBase file)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            string image = "";
+
+            if (file != null)
+            {
+
+                byte[] fileBytes = new byte[file.ContentLength];
+                file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                file.InputStream.Close();
+                string fileContent = Convert.ToBase64String(fileBytes);
+                image = obj.Upload(fileContent);
+
+                course.Image = image;
+            }
+
             if (ModelState.IsValid)
             {
                 course.Updated_At = DateTime.UtcNow.ToLocalTime();
@@ -95,6 +149,10 @@ namespace ECourses.Controllers
         // GET: Courses/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -112,6 +170,10 @@ namespace ECourses.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             Course course = db.Courses.Find(id);
             db.Courses.Remove(course);
             db.SaveChanges();
@@ -120,6 +182,7 @@ namespace ECourses.Controllers
 
         protected override void Dispose(bool disposing)
         {
+
             if (disposing)
             {
                 db.Dispose();
@@ -129,6 +192,10 @@ namespace ECourses.Controllers
 
         public ActionResult Search(string SearchString)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
 
             List<Course> list = db.Courses.Where(x => x.Title.Contains(SearchString)).ToList();
 

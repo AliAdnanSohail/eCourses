@@ -39,7 +39,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
@@ -60,15 +60,15 @@
           <Property Name="Teacher_Id" Type="int" />
           <Property Name="Gender" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="int" />
-          <Property Name="Course_Type_id" Type="int" />
           <Property Name="City_id" Type="int" />
+          <Property Name="Course_Type_id" Type="int" />
         </EntityType>
         <EntityType Name="Course_Type">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Course_Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="Course_Type" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Favourite_Courses">
           <Key>
@@ -106,6 +106,8 @@
           <Property Name="Gender" Type="nvarchar" MaxLength="20" />
           <Property Name="User_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Device_id" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -113,11 +115,11 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="500" />
           <Property Name="Gender" Type="nvarchar" MaxLength="20" />
-          <Property Name="Device_Id" Type="varchar" MaxLength="500" />
+          <Property Name="Device_id" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_Course_ToCity">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
@@ -131,7 +133,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Course_ToCourseType">
+        <Association Name="FK_Course_ToCourse_type">
           <End Role="Course_Type" Type="Self.Course_Type" Multiplicity="0..1" />
           <End Role="Course" Type="Self.Course" Multiplicity="*" />
           <ReferentialConstraint>
@@ -243,7 +245,7 @@
             <End Role="City" EntitySet="City" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
-          <AssociationSet Name="FK_Course_ToCourseType" Association="Self.FK_Course_ToCourseType">
+          <AssociationSet Name="FK_Course_ToCourse_type" Association="Self.FK_Course_ToCourse_type">
             <End Role="Course_Type" EntitySet="Course_Type" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
@@ -372,6 +374,8 @@
           <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Courses" Relationship="ECoursesDBModel.FK_Course_ToTeacher" FromRole="Teacher" ToRole="Course" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Device_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -385,8 +389,9 @@
           <NavigationProperty Name="Like_Courses" Relationship="Self.FK_Like_Courses_ToUser" FromRole="User" ToRole="Like_Courses" />
           <NavigationProperty Name="Subscription_Courses" Relationship="Self.FK_Subscription_Courses_ToUser" FromRole="User" ToRole="Subscription_Courses" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Device_Id" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Device_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+       
         </EntityType>
         <Association Name="FK_Favourite_Courses_ToCourses">
           <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
@@ -535,7 +540,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Courses" Relationship="ECoursesDBModel.FK_Course_ToCity" FromRole="City" ToRole="Course" />
           </EntityType>
         <EntityType Name="Course_Type">
@@ -543,7 +548,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Course_Type1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Course_Type1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Courses" Relationship="ECoursesDBModel.FK_Course_ToCourseType" FromRole="Course_Type" ToRole="Course" />
            </EntityType>
         <Association Name="FK_Course_ToCity">
@@ -654,6 +659,8 @@
           <EntitySetMapping Name="Teachers">
             <EntityTypeMapping TypeName="ECoursesDBModel.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="Device_id" ColumnName="Device_id" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="User_Name" ColumnName="User_Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -668,7 +675,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="ECoursesDBModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Device_Id" ColumnName="Device_Id" />
+              
+                <ScalarProperty Name="Device_id" ColumnName="Device_id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

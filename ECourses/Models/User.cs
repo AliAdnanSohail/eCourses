@@ -28,7 +28,7 @@ namespace ECourses.Models
         public string Gender { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Device_Id { get; set; }
+        public string Device_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favourite_Courses> Favourite_Courses { get; set; }

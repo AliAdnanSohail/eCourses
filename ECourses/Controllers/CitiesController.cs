@@ -17,12 +17,20 @@ namespace ECourses.Controllers
         // GET: Cities
         public ActionResult Index()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View(db.Cities.ToList());
         }
 
         // GET: Cities/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +46,10 @@ namespace ECourses.Controllers
         // GET: Cities/Create
         public ActionResult Create()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -48,6 +60,10 @@ namespace ECourses.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] City city)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Cities.Add(city);
@@ -61,6 +77,10 @@ namespace ECourses.Controllers
         // GET: Cities/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +100,10 @@ namespace ECourses.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] City city)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(city).State = EntityState.Modified;
@@ -92,6 +116,10 @@ namespace ECourses.Controllers
         // GET: Cities/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +137,10 @@ namespace ECourses.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             City city = db.Cities.Find(id);
             db.Cities.Remove(city);
             db.SaveChanges();
@@ -117,6 +149,7 @@ namespace ECourses.Controllers
 
         protected override void Dispose(bool disposing)
         {
+           
             if (disposing)
             {
                 db.Dispose();

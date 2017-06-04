@@ -92,6 +92,8 @@
     <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Courses" Relationship="ECoursesDBModel.FK_Course_ToTeacher" FromRole="Teacher" ToRole="Course" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Device_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -105,8 +107,8 @@
     <NavigationProperty Name="Like_Courses" Relationship="Self.FK_Like_Courses_ToUser" FromRole="User" ToRole="Like_Courses" />
     <NavigationProperty Name="Subscription_Courses" Relationship="Self.FK_Subscription_Courses_ToUser" FromRole="User" ToRole="Subscription_Courses" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Device_Id" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Device_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Favourite_Courses_ToCourses">
     <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
@@ -254,7 +256,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Courses" Relationship="ECoursesDBModel.FK_Course_ToCity" FromRole="City" ToRole="Course" />
   </EntityType>
   <EntityType Name="Course_Type">
@@ -262,7 +264,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Course_Type1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Course_Type1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Courses" Relationship="ECoursesDBModel.FK_Course_ToCourseType" FromRole="Course_Type" ToRole="Course" />
   </EntityType>
   <Association Name="FK_Course_ToCity">

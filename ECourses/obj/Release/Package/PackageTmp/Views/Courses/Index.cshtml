@@ -27,11 +27,12 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Image)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Start_Date)
         </th>
@@ -47,11 +48,14 @@
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Course_Type)
-        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayName("City")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course_Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Duration)
@@ -62,17 +66,25 @@
         <th>
             @Html.DisplayNameFor(model => model.Updated_At)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+
+            <img src=@item.Image height="100" width="100" />
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Image)
+            @Html.DisplayFor(modelItem => item.Title)
         </td>
+       
         <td>
             @Html.DisplayFor(modelItem => item.Start_Date)
         </td>
@@ -88,11 +100,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Course_Type)
-        </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.City.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course_Type.Course_Type1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Duration)
@@ -102,6 +117,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Updated_At)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

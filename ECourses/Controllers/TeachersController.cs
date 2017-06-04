@@ -17,12 +17,20 @@ namespace ECourses.Controllers
         // GET: Teachers
         public ActionResult Index()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View(db.Teachers.ToList());
         }
 
         // GET: Teachers/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +46,10 @@ namespace ECourses.Controllers
         // GET: Teachers/Create
         public ActionResult Create()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -48,18 +60,15 @@ namespace ECourses.Controllers
        
         public ActionResult Create( Teacher teacher, HttpPostedFileBase file)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             string image="";
            
             if (file != null)
             {
-                //pic = System.IO.Path.GetFileName(file.FileName);
-                // path = System.IO.Path.Combine(
-                //                       Server.MapPath("~/App_Data/uploads"), pic);
-                //// file is uploaded
-                //file.SaveAs(path);
-                //obj.PostToImgur(path);
-
-
+                
                 
                 byte[] fileBytes = new byte[file.ContentLength];
                 file.InputStream.Read(fileBytes, 0, fileBytes.Length);
@@ -84,6 +93,10 @@ namespace ECourses.Controllers
         // GET: Teachers/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -101,8 +114,27 @@ namespace ECourses.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,First_Name,Second_Name,Password,Address,Gender,User_Name")] Teacher teacher)
+        public ActionResult Edit(Teacher teacher, HttpPostedFileBase file)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            string image = "";
+
+            if (file != null)
+            {
+
+
+                byte[] fileBytes = new byte[file.ContentLength];
+                file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                file.InputStream.Close();
+                string fileContent = Convert.ToBase64String(fileBytes);
+                image = obj.Upload(fileContent);
+
+                teacher.Image = image;
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(teacher).State = EntityState.Modified;
@@ -115,6 +147,10 @@ namespace ECourses.Controllers
         // GET: Teachers/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -132,6 +168,10 @@ namespace ECourses.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             Teacher teacher = db.Teachers.Find(id);
             db.Teachers.Remove(teacher);
             db.SaveChanges();
@@ -150,6 +190,10 @@ namespace ECourses.Controllers
 
         public ActionResult Search(string SearchString)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
 
             List<Teacher> list = db.Teachers.Where(x => x.First_Name.Contains(SearchString)).ToList();
 

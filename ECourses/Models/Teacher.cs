@@ -28,6 +28,8 @@ namespace ECourses.Models
         public string Gender { get; set; }
         public string User_Name { get; set; }
         public string Image { get; set; }
+        public string Phone { get; set; }
+        public string Device_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Course> Courses { get; set; }

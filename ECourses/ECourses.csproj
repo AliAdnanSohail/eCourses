@@ -232,6 +232,11 @@
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
     <None Include="Properties\PublishProfiles\Ali.pubxml" />
+    <None Include="Properties\PublishProfiles\Dawratty - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Dawratty - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\dawratty.com - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\dawratty.pubxml" />
+    <None Include="Properties\PublishProfiles\tabbiby.com - Web Deploy %282%29.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -249,6 +254,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <None Include="Views\Home\Privacy.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -290,6 +296,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ImageUpload.cs" />
+    <Compile Include="Models\LikedCourse.cs" />
     <Compile Include="Models\Like_Courses.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -355,6 +362,8 @@
     <Content Include="Views\Cities\Details.cshtml" />
     <Content Include="Views\Cities\Edit.cshtml" />
     <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\Home\About_Us.cshtml" />
+    <Content Include="Views\Home\Advertisement.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

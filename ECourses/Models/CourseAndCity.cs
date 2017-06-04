@@ -9,6 +9,8 @@ namespace ECourses.Models
     {
         public List<Course_Type> courseType;
         public List<City> cities;
+        public String course_type;
+        public String city;
 
 
 

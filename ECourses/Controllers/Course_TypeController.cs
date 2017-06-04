@@ -17,12 +17,20 @@ namespace ECourses.Controllers
         // GET: Course_Type
         public ActionResult Index()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View(db.Course_Type.ToList());
         }
 
         // GET: Course_Type/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +46,10 @@ namespace ECourses.Controllers
         // GET: Course_Type/Create
         public ActionResult Create()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -48,6 +60,10 @@ namespace ECourses.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Course_Type1")] Course_Type course_Type)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Course_Type.Add(course_Type);
@@ -61,6 +77,10 @@ namespace ECourses.Controllers
         // GET: Course_Type/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +100,10 @@ namespace ECourses.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Course_Type1")] Course_Type course_Type)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(course_Type).State = EntityState.Modified;
@@ -92,6 +116,10 @@ namespace ECourses.Controllers
         // GET: Course_Type/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +137,10 @@ namespace ECourses.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             Course_Type course_Type = db.Course_Type.Find(id);
             db.Course_Type.Remove(course_Type);
             db.SaveChanges();
@@ -117,6 +149,7 @@ namespace ECourses.Controllers
 
         protected override void Dispose(bool disposing)
         {
+           
             if (disposing)
             {
                 db.Dispose();

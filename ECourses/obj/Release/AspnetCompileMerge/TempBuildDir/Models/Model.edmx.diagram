@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="db5fc9dc620e4dc59e743e51a1335bc4" Name="Diagram1" ZoomLevel="76">
+        <EntityTypeShape EntityType="ECoursesDBModel.About_Us" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECoursesDBModel.Advertisement" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECoursesDBModel.Course" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECoursesDBModel.Favourite_Courses" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECoursesDBModel.Like_Courses" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECoursesDBModel.Subscription_Courses" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECoursesDBModel.Teacher" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECoursesDBModel.User" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Favourite_Courses_ToCourses" ManuallyRouted="false" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Like_Courses_ToCourses" ManuallyRouted="false" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Subscription_Courses_ToCourses" ManuallyRouted="false" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Favourite_Courses_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Like_Courses_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Subscription_Courses_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Course_ToTeacher" />
+        <EntityTypeShape EntityType="ECoursesDBModel.Admin" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ECoursesDBModel.City" Width="1.5" PointX="3" PointY="10.25" />
+        <EntityTypeShape EntityType="ECoursesDBModel.Course_Type" Width="1.5" PointX="3" PointY="12.75" />
+        <AssociationConnector Association="ECoursesDBModel.FK_City_ToCourses" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Course_Type_ToCourses" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Course_ToCity" />
+        <AssociationConnector Association="ECoursesDBModel.FK_Course_ToCourseType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
